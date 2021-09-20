@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "state": {
+          "branch": null,
+          "revision": "fca036f7aeca07124067cb6e0c12b0ad6359e3d4",
+          "version": "5.1.0"
+        }
+      },
+      {
+        "package": "ProgressHUD",
+        "repositoryURL": "https://github.com/relatedcode/ProgressHUD.git",
+        "state": {
+          "branch": "13.6",
+          "revision": "e9a8d857ec6fdbf8ad201c5820cee7b4d98bf62c",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
