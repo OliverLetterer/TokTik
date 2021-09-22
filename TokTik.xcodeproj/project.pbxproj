@@ -19,6 +19,8 @@
 		A75D0FBB26E11BDC004BAD10 /* CodableSettingsValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75D0FBA26E11BDC004BAD10 /* CodableSettingsValue.swift */; };
 		A75D0FBD26E11CC0004BAD10 /* _TikTokViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75D0FBC26E11CC0004BAD10 /* _TikTokViewController.swift */; };
 		A75D0FC526E14BD4004BAD10 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = A75D0FC426E14BD4004BAD10 /* ProgressHUD */; };
+		A7BF1E1B26FB156000EF0BFE /* tt-params.js in Resources */ = {isa = PBXBuildFile; fileRef = A7BF1E1A26FB156000EF0BFE /* tt-params.js */; };
+		A7BF1E1D26FB158F00EF0BFE /* acrawler.js in Resources */ = {isa = PBXBuildFile; fileRef = A7BF1E1C26FB158F00EF0BFE /* acrawler.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		A75D0FB826E11B11004BAD10 /* _Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Config.swift; sourceTree = "<group>"; };
 		A75D0FBA26E11BDC004BAD10 /* CodableSettingsValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableSettingsValue.swift; sourceTree = "<group>"; };
 		A75D0FBC26E11CC0004BAD10 /* _TikTokViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _TikTokViewController.swift; sourceTree = "<group>"; };
+		A7BF1E1A26FB156000EF0BFE /* tt-params.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "tt-params.js"; sourceTree = "<group>"; };
+		A7BF1E1C26FB158F00EF0BFE /* acrawler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = acrawler.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,8 @@
 				A75D0FB626E119F3004BAD10 /* TikTok.swift */,
 				A75D0FB826E11B11004BAD10 /* _Config.swift */,
 				A75D0FBA26E11BDC004BAD10 /* CodableSettingsValue.swift */,
+				A7BF1E1C26FB158F00EF0BFE /* acrawler.js */,
+				A7BF1E1A26FB156000EF0BFE /* tt-params.js */,
 			);
 			path = TokTik;
 			sourceTree = "<group>";
@@ -158,8 +164,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A75D0FAC26E11680004BAD10 /* LaunchScreen.storyboard in Resources */,
+				A7BF1E1B26FB156000EF0BFE /* tt-params.js in Resources */,
 				A75D0FA926E11680004BAD10 /* Assets.xcassets in Resources */,
 				A75D0FA726E1167E004BAD10 /* Main.storyboard in Resources */,
+				A7BF1E1D26FB158F00EF0BFE /* acrawler.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,7 +411,7 @@
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 5.1.0;
+				minimumVersion = 5.4.3;
 			};
 		};
 		A75D0FC226E14AD6004BAD10 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {

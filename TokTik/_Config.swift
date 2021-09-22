@@ -29,6 +29,16 @@ public struct _Config {
         }
     }
     
+    public static var influencerHunterAPIKey: String? {
+        get {
+            return UserDefaults.standard.string(forKey: "settings.influencerHunterAPIKey")
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: "settings.influencerHunterAPIKey")
+        }
+    }
+    
     public static var lastRefresh: Date? {
         get {
             return UserDefaults.standard.value(forKey: "settings.lastRefresh") as? Date

@@ -187,30 +187,58 @@ private extension ViewController {
             return
         }
         
-        TikTok.sign(url: "https://m.tiktok.com/api/post/item_list/?aid=1988&count=30&id=\(profile.id)&cursor=0&type=1&secUid=\(profile.secUid)") { result in
-            switch result {
-            case let .failure(error):
-                completion(.failure(error))
-            case let .success(body):
-                struct TikTokResponse: Codable {
-                    var statusCode: Int
-                    var itemList: [TikTok]
+        if let key = _Config.influencerHunterAPIKey {
+            let parameters: [String: String] = [
+                "token": key,
+                "depth": "1",
+                "secUid": profile.secUid
+            ]
+            
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .secondsSince1970
+            
+            AF.request("https://www.influencerhunters.com/apis/tt/user/posts-from-secuid", parameters: parameters).responseDecodable(of: TikTok.InfluencerPostsResponse.self, decoder: decoder) { response in
+                guard let tikToks = response.value?.tikToks else {
+                    return completion(.failure(response.error ?? URLError(.badServerResponse)))
                 }
                 
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .secondsSince1970
+                var _profiles = profiles
+                _profiles.removeAll(where: { $0.id == profile.id })
                 
-                AF.request(body.data.signed_url, method: .get, headers: [ .userAgent(body.data.navigator.user_agent) ]).responseDecodable(of: TikTokResponse.self, decoder: decoder) { response in
-                    guard let tikToks = response.value?.itemList.prefix(10) else {
-                        completion(.failure(response.error ?? URLError(.badServerResponse)))
-                        return
+                let result = _tikToks + tikToks
+                self._reloadProfiles(_profiles, _tikToks: result, completion: completion)
+            }
+        } else {
+            TikTok.sign(url: "https://m.tiktok.com/api/post/item_list/?aid=1988&count=30&id=\(profile.id)&cursor=0&type=1&secUid=\(profile.secUid)") { result in
+                switch result {
+                case let .failure(error):
+                    completion(.failure(error))
+                case let .success(signature):
+                    struct TikTokResponse: Codable {
+                        var statusCode: Int
+                        var itemList: [TikTok]
                     }
                     
-                    var _profiles = profiles
-                    _profiles.removeAll(where: { $0.id == profile.id })
+                    let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = .secondsSince1970
                     
-                    let result = _tikToks + tikToks
-                    self._reloadProfiles(_profiles, _tikToks: result, completion: completion)
+                    let headers: HTTPHeaders = [
+                        .userAgent(signature.userAgent),
+                        HTTPHeader(name: "x-tt-params", value: signature.ttParams)
+                    ]
+                    
+                    AF.request(signature.signedURL, method: .get, headers: headers).responseDecodable(of: TikTokResponse.self, decoder: decoder) { response in
+                        guard let tikToks = response.value?.itemList.prefix(10) else {
+                            completion(.failure(response.error ?? URLError(.badServerResponse)))
+                            return
+                        }
+                        
+                        var _profiles = profiles
+                        _profiles.removeAll(where: { $0.id == profile.id })
+                        
+                        let result = _tikToks + tikToks
+                        self._reloadProfiles(_profiles, _tikToks: result, completion: completion)
+                    }
                 }
             }
         }
